@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Growing Up — A Family Record</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emily: #E25D7D;
+            --oliver: #4A9DB0;
+            --charlie: #E8994A;
+            --abigail: #A07DC0;
+
+```
+        --bg-primary: #FFFEFA;
+        --bg-secondary: #FBF9F4;
+        --bg-card: #FFFFFF;
+        --ink: #2D2926;
+        --ink-soft: #4A4542;
+        --ink-muted: #6B665F;
+        --rule: #E8E2D9;
+        --grid: #EDE9E2;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --emily: #F27A97;
+            --oliver: #5DC0D6;
+            --charlie: #FFB366;
+            --abigail: #C4A3E0;
+            
+            --bg-primary: #1A1918;
+            --bg-secondary: #222120;
+            --bg-card: #2A2827;
+            --ink: #F5F2ED;
+            --ink-soft: #D4CFC6;
+            --ink-muted: #9E9890;
+            --rule: #3D3A37;
+            --grid: #333130;
+        }
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 400;
+        background: var(--bg-secondary);
+        color: var(--ink);
+        min-height: 100vh;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    .page {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 80px 40px;
+    }
+    
+    @media (max-width: 600px) {
+        .page { padding: 50px 24px; }
+    }
+    
+    header {
+        text-align: center;
+        margin-bottom: 70px;
+        animation: fadeIn 1s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .overline {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: var(--ink-muted);
+        margin-bottom: 20px;
+    }
+    
+    h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 300;
+        font-style: italic;
+        color: var(--ink);
+        line-height: 1;
+        margin-bottom: 24px;
+    }
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 30px 0;
+    }
+    
+    .divider-line { width: 60px; height: 1px; background: var(--rule); }
+    .divider-diamond { width: 6px; height: 6px; background: var(--ink-muted); transform: rotate(45deg); }
+    
+    .intro {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.3rem;
+        color: var(--ink-soft);
+        max-width: 500px;
+        margin: 0 auto;
+        font-style: italic;
+    }
+    
+    .children-legend {
+        display: flex;
+        justify-content: center;
+        gap: 36px;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+        animation: fadeIn 1s ease-out 0.2s both;
+    }
+    
+    .child-tag {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        padding: 8px 0;
+    }
+    
+    .child-tag:hover { opacity: 0.7; }
+    .child-tag.inactive { opacity: 0.3; }
+    
+    .child-marker {
+        position: relative;
+        width: 36px;
+        height: 3px;
+    }
+    
+    .child-marker::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 3px;
+        border-radius: 2px;
+    }
+    
+    .child-marker::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+    
+    .child-tag.emily .child-marker::before,
+    .child-tag.emily .child-marker::after { background: var(--emily); }
+    .child-tag.oliver .child-marker::before,
+    .child-tag.oliver .child-marker::after { background: var(--oliver); }
+    .child-tag.charlie .child-marker::before,
+    .child-tag.charlie .child-marker::after { background: var(--charlie); }
+    .child-tag.abigail .child-marker::before,
+    .child-tag.abigail .child-marker::after { background: var(--abigail); }
+    
+    .child-info { text-align: left; }
+    
+    .child-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--ink);
+    }
+    
+    .child-dob {
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+    }
+    
+    .chart-frame {
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid var(--rule);
+        padding: 40px 40px 30px 50px;
+        margin-bottom: 60px;
+        animation: fadeIn 1s ease-out 0.4s both;
+    }
+    
+    .chart-frame::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        right: -8px;
+        bottom: -8px;
+        border: 1px solid var(--rule);
+        z-index: -1;
+    }
+    
+    .chart-wrapper {
+        position: relative;
+        height: 480px;
+    }
+    
+    .stats-section {
+        animation: fadeIn 1s ease-out 0.6s both;
+    }
+    
+    .stats-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .stats-header h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: var(--ink);
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    @media (max-width: 700px) {
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    .stat-cell {
+        background: var(--bg-card);
+        padding: 28px 24px;
+        text-align: center;
+        border-radius: 4px;
+        border: 1px solid var(--rule);
+        border-top: 4px solid transparent;
+    }
+    
+    .stat-cell.emily { border-top-color: var(--emily); }
+    .stat-cell.oliver { border-top-color: var(--oliver); }
+    .stat-cell.charlie { border-top-color: var(--charlie); }
+    .stat-cell.abigail { border-top-color: var(--abigail); }
+    
+    .stat-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+    
+    .stat-name.emily { color: var(--emily); }
+    .stat-name.oliver { color: var(--oliver); }
+    .stat-name.charlie { color: var(--charlie); }
+    .stat-name.abigail { color: var(--abigail); }
+    
+    .stat-age {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--ink-muted);
+        margin-bottom: 14px;
+    }
+    
+    .stat-height {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 3rem;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+    }
+    
+    .stat-height span {
+        font-size: 1.3rem;
+        color: var(--ink-soft);
+    }
+    
+    .stat-note {
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        margin-top: 10px;
+    }
+    
+    footer {
+        text-align: center;
+        margin-top: 70px;
+        padding-top: 40px;
+        border-top: 1px solid var(--rule);
+    }
+    
+    footer p {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--ink-soft);
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="page">
+        <header>
+            <p class="overline">A Family Record · 2020–2025</p>
+            <h1>Growing Up</h1>
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond"></span>
+                <span class="divider-line"></span>
+            </div>
+            <p class="intro">Measuring the heights of four children as they grow, charted by age for comparison</p>
+        </header>
+
+```
+    <div class="children-legend">
+        <div class="child-tag emily active" onclick="toggleChild('emily')">
+            <span class="child-marker"></span>
+            <div class="child-info">
+                <div class="child-name">Emily</div>
+                <div class="child-dob">b. 22 August 2014</div>
+            </div>
+        </div>
+        <div class="child-tag oliver active" onclick="toggleChild('oliver')">
+            <span class="child-marker"></span>
+            <div class="child-info">
+                <div class="child-name">Oliver</div>
+                <div class="child-dob">b. 8 November 2016</div>
+            </div>
+        </div>
+        <div class="child-tag charlie active" onclick="toggleChild('charlie')">
+            <span class="child-marker"></span>
+            <div class="child-info">
+                <div class="child-name">Charlie</div>
+                <div class="child-dob">b. 5 February 2019</div>
+            </div>
+        </div>
+        <div class="child-tag abigail active" onclick="toggleChild('abigail')">
+            <span class="child-marker"></span>
+            <div class="child-info">
+                <div class="child-name">Abigail</div>
+                <div class="child-dob">b. 7 July 2022</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-frame">
+        <div class="chart-wrapper">
+            <canvas id="growthChart"></canvas>
+        </div>
+    </div>
+    
+    <section class="stats-section">
+        <div class="stats-header">
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond"></span>
+                <span class="divider-line"></span>
+            </div>
+            <h2>Latest Measurements · December 2025</h2>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-cell emily">
+                <div class="stat-name emily">Emily</div>
+                <div class="stat-age">11 years 4 months</div>
+                <div class="stat-height">152<span>cm</span></div>
+                <div class="stat-note">+61cm since first measure</div>
+            </div>
+            <div class="stat-cell oliver">
+                <div class="stat-name oliver">Oliver</div>
+                <div class="stat-age">9 years 1 month</div>
+                <div class="stat-height">137<span>cm</span></div>
+                <div class="stat-note">+52cm since first measure</div>
+            </div>
+            <div class="stat-cell charlie">
+                <div class="stat-name charlie">Charlie</div>
+                <div class="stat-age">6 years 10 months</div>
+                <div class="stat-height">108<span>cm</span></div>
+                <div class="stat-note">First measurement</div>
+            </div>
+            <div class="stat-cell abigail">
+                <div class="stat-name abigail">Abigail</div>
+                <div class="stat-age">3 years 5 months</div>
+                <div class="stat-height">84<span>cm</span></div>
+                <div class="stat-note">First measurement</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Hover over points to reveal measurements</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const colors = {
+        emily: isDarkMode ? '#F27A97' : '#E25D7D',
+        oliver: isDarkMode ? '#5DC0D6' : '#4A9DB0',
+        charlie: isDarkMode ? '#FFB366' : '#E8994A',
+        abigail: isDarkMode ? '#C4A3E0' : '#A07DC0'
+    };
+    
+    const chartColors = {
+        grid: isDarkMode ? '#333130' : '#EDE9E2',
+        text: isDarkMode ? '#D4CFC6' : '#5C5852',
+        tooltipBg: isDarkMode ? '#F5F2ED' : '#2D2926',
+        tooltipText: isDarkMode ? '#1A1918' : '#FFFFFF',
+        pointBorder: isDarkMode ? '#2A2827' : '#FFFFFF'
+    };
+    
+    const dobs = {
+        emily: new Date('2014-08-22'),
+        oliver: new Date('2016-11-08'),
+        charlie: new Date('2019-02-05'),
+        abigail: new Date('2022-07-07')
+    };
+    
+    function calcAge(dob, measureDate) {
+        const ms = measureDate - dob;
+        return Math.round((ms / (1000 * 60 * 60 * 24 * 365.25)) * 100) / 100;
+    }
+    
+    function formatAge(ageYears) {
+        const years = Math.floor(ageYears);
+        const months = Math.round((ageYears - years) * 12);
+        if (months === 0) return `${years} years`;
+        if (years === 0) return `${months} months`;
+        return `${years}y ${months}m`;
+    }
+    
+    const rawData = {
+        emily: [
+            { date: new Date('2020-02-15'), height: 91 },
+            { date: new Date('2022-05-15'), height: 120 },
+            { date: new Date('2022-10-15'), height: 122 },
+            { date: new Date('2023-10-15'), height: 131 },
+            { date: new Date('2024-01-15'), height: 135 },
+            { date: new Date('2024-04-15'), height: 139 },
+            { date: new Date('2024-10-15'), height: 142 },
+            { date: new Date('2025-01-15'), height: 145 },
+            { date: new Date('2025-02-15'), height: 147 },
+            { date: new Date('2025-12-15'), height: 152 }
+        ],
+        oliver: [
+            { date: new Date('2020-02-15'), height: 85 },
+            { date: new Date('2022-05-15'), height: 99 },
+            { date: new Date('2022-10-15'), height: 103 },
+            { date: new Date('2024-04-15'), height: 118 },
+            { date: new Date('2024-10-15'), height: 125 },
+            { date: new Date('2025-01-15'), height: 127 },
+            { date: new Date('2025-02-15'), height: 129 },
+            { date: new Date('2025-12-15'), height: 137 }
+        ],
+        charlie: [
+            { date: new Date('2025-12-15'), height: 108 }
+        ],
+        abigail: [
+            { date: new Date('2025-12-15'), height: 84 }
+        ]
+    };
+    
+    const data = {
+        emily: rawData.emily.map(d => ({
+            x: calcAge(dobs.emily, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        oliver: rawData.oliver.map(d => ({
+            x: calcAge(dobs.oliver, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        charlie: rawData.charlie.map(d => ({
+            x: calcAge(dobs.charlie, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        abigail: rawData.abigail.map(d => ({
+            x: calcAge(dobs.abigail, d.date),
+            y: d.height,
+            date: d.date
+        }))
+    };
+    
+    const visibility = { emily: true, oliver: true, charlie: true, abigail: true };
+    
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [
+                {
+                    label: 'Emily',
+                    data: data.emily,
+                    borderColor: colors.emily,
+                    backgroundColor: colors.emily,
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: colors.emily,
+                    pointBorderColor: chartColors.pointBorder,
+                    pointBorderWidth: 2,
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Oliver',
+                    data: data.oliver,
+                    borderColor: colors.oliver,
+                    backgroundColor: colors.oliver,
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: colors.oliver,
+                    pointBorderColor: chartColors.pointBorder,
+                    pointBorderWidth: 2,
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Charlie',
+                    data: data.charlie,
+                    borderColor: colors.charlie,
+                    backgroundColor: colors.charlie,
+                    borderWidth: 2.5,
+                    pointRadius: 7,
+                    pointHoverRadius: 10,
+                    pointBackgroundColor: colors.charlie,
+                    pointBorderColor: chartColors.pointBorder,
+                    pointBorderWidth: 2,
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Abigail',
+                    data: data.abigail,
+                    borderColor: colors.abigail,
+                    backgroundColor: colors.abigail,
+                    borderWidth: 2.5,
+                    pointRadius: 7,
+                    pointHoverRadius: 10,
+                    pointBackgroundColor: colors.abigail,
+                    pointBorderColor: chartColors.pointBorder,
+                    pointBorderWidth: 2,
+                    tension: 0.3,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'nearest'
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: chartColors.tooltipBg,
+                    titleColor: chartColors.tooltipText,
+                    bodyColor: chartColors.tooltipText,
+                    titleFont: { 
+                        family: "'Cormorant Garamond', serif",
+                        size: 18,
+                        weight: '600'
+                    },
+                    bodyFont: { 
+                        family: "'Outfit', sans-serif",
+                        size: 13,
+                        weight: '400'
+                    },
+                    padding: 16,
+                    cornerRadius: 2,
+                    displayColors: false,
+                    callbacks: {
+                        title: function(context) {
+                            return context[0].dataset.label;
+                        },
+                        label: function(context) {
+                            const age = formatAge(context.parsed.x);
+                            const dateStr = context.raw.date.toLocaleDateString('en-GB', { 
+                                month: 'short', 
+                                year: 'numeric' 
+                            });
+                            return [`${context.parsed.y} cm`, `Age: ${age}`, dateStr];
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    min: 0,
+                    max: 12,
+                    grid: {
+                        color: chartColors.grid,
+                        drawBorder: false,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        font: {
+                            family: "'Outfit', sans-serif",
+                            size: 12,
+                            weight: '400'
+                        },
+                        color: chartColors.text,
+                        callback: value => value + ' yrs',
+                        stepSize: 2
+                    },
+                    title: {
+                        display: true,
+                        text: 'Age',
+                        font: {
+                            family: "'Cormorant Garamond', serif",
+                            size: 15,
+                            weight: '500',
+                            style: 'italic'
+                        },
+                        color: chartColors.text,
+                        padding: { top: 16 }
+                    },
+                    border: { display: false }
+                },
+                y: {
+                    min: 70,
+                    max: 160,
+                    grid: {
+                        color: chartColors.grid,
+                        drawBorder: false,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        font: {
+                            family: "'Outfit', sans-serif",
+                            size: 12,
+                            weight: '400'
+                        },
+                        color: chartColors.text,
+                        callback: value => value + ' cm',
+                        stepSize: 15
+                    },
+                    title: {
+                        display: true,
+                        text: 'Height',
+                        font: {
+                            family: "'Cormorant Garamond', serif",
+                            size: 15,
+                            weight: '500',
+                            style: 'italic'
+                        },
+                        color: chartColors.text,
+                        padding: { bottom: 16 }
+                    },
+                    border: { display: false }
+                }
+            },
+            animation: {
+                duration: 1200,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
+    
+    function toggleChild(name) {
+        visibility[name] = !visibility[name];
+        const index = ['emily', 'oliver', 'charlie', 'abigail'].indexOf(name);
+        chart.getDatasetMeta(index).hidden = !visibility[name];
+        chart.update();
+        
+        const tag = document.querySelector(`.child-tag.${name}`);
+        tag.classList.toggle('active', visibility[name]);
+        tag.classList.toggle('inactive', !visibility[name]);
+    }
+</script>
+```
+
+</body>
+</html>
