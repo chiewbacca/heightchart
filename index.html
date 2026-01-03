@@ -15,7 +15,6 @@
             --abigail: #A07DC0;
 
 ```
-        /* Light mode defaults */
         --bg-primary: #FFFEFA;
         --bg-secondary: #FBF9F4;
         --bg-card: #FFFFFF;
@@ -26,7 +25,6 @@
         --grid: #EDE9E2;
     }
     
-    /* Dark mode overrides */
     @media (prefers-color-scheme: dark) {
         :root {
             --emily: #F27A97;
@@ -45,15 +43,7 @@
         }
     }
     
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    html {
-        font-size: 16px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
         font-family: 'Outfit', sans-serif;
@@ -72,12 +62,9 @@
     }
     
     @media (max-width: 600px) {
-        .page {
-            padding: 50px 24px;
-        }
+        .page { padding: 50px 24px; }
     }
     
-    /* Header */
     header {
         text-align: center;
         margin-bottom: 70px;
@@ -90,7 +77,6 @@
     }
     
     .overline {
-        font-family: 'Outfit', sans-serif;
         font-size: 0.75rem;
         font-weight: 500;
         text-transform: uppercase;
@@ -107,7 +93,6 @@
         color: var(--ink);
         line-height: 1;
         margin-bottom: 24px;
-        letter-spacing: -0.02em;
     }
     
     .divider {
@@ -118,18 +103,8 @@
         margin: 30px 0;
     }
     
-    .divider-line {
-        width: 60px;
-        height: 1px;
-        background: var(--rule);
-    }
-    
-    .divider-diamond {
-        width: 6px;
-        height: 6px;
-        background: var(--ink-muted);
-        transform: rotate(45deg);
-    }
+    .divider-line { width: 60px; height: 1px; background: var(--rule); }
+    .divider-diamond { width: 6px; height: 6px; background: var(--ink-muted); transform: rotate(45deg); }
     
     .intro {
         font-family: 'Cormorant Garamond', serif;
@@ -140,7 +115,6 @@
         font-style: italic;
     }
     
-    /* Children legend */
     .children-legend {
         display: flex;
         justify-content: center;
@@ -159,13 +133,8 @@
         padding: 8px 0;
     }
     
-    .child-tag:hover {
-        opacity: 0.7;
-    }
-    
-    .child-tag.inactive {
-        opacity: 0.3;
-    }
+    .child-tag:hover { opacity: 0.7; }
+    .child-tag.inactive { opacity: 0.3; }
     
     .child-marker {
         position: relative;
@@ -204,25 +173,20 @@
     .child-tag.abigail .child-marker::before,
     .child-tag.abigail .child-marker::after { background: var(--abigail); }
     
-    .child-info {
-        text-align: left;
-    }
+    .child-info { text-align: left; }
     
     .child-name {
         font-family: 'Cormorant Garamond', serif;
         font-size: 1.2rem;
         font-weight: 600;
         color: var(--ink);
-        letter-spacing: 0.01em;
     }
     
     .child-dob {
         font-size: 0.8rem;
         color: var(--ink-soft);
-        letter-spacing: 0.3px;
     }
     
-    /* Chart area */
     .chart-frame {
         position: relative;
         background: var(--bg-card);
@@ -245,10 +209,9 @@
     
     .chart-wrapper {
         position: relative;
-        height: 420px;
+        height: 480px;
     }
     
-    /* Stats section */
     .stats-section {
         animation: fadeIn 1s ease-out 0.6s both;
     }
@@ -272,16 +235,13 @@
     }
     
     @media (max-width: 700px) {
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
     
     .stat-cell {
         background: var(--bg-card);
         padding: 28px 24px;
         text-align: center;
-        position: relative;
         border-radius: 4px;
         border: 1px solid var(--rule);
         border-top: 4px solid transparent;
@@ -308,7 +268,7 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        color: var(--ink-soft);
+        color: var(--ink-muted);
         margin-bottom: 14px;
     }
     
@@ -331,13 +291,11 @@
         margin-top: 10px;
     }
     
-    /* Footer */
     footer {
         text-align: center;
         margin-top: 70px;
         padding-top: 40px;
         border-top: 1px solid var(--rule);
-        animation: fadeIn 1s ease-out 0.8s both;
     }
     
     footer p {
@@ -433,8 +391,8 @@
             <div class="stat-cell abigail">
                 <div class="stat-name abigail">Abigail</div>
                 <div class="stat-age">3 years 5 months</div>
-                <div class="stat-height">—</div>
-                <div class="stat-note">Awaiting first measure</div>
+                <div class="stat-height">84<span>cm</span></div>
+                <div class="stat-note">First measurement</div>
             </div>
         </div>
     </section>
@@ -447,7 +405,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
-    // Detect dark mode
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     const colors = {
@@ -474,8 +431,7 @@
     
     function calcAge(dob, measureDate) {
         const ms = measureDate - dob;
-        const years = ms / (1000 * 60 * 60 * 24 * 365.25);
-        return Math.round(years * 100) / 100;
+        return Math.round((ms / (1000 * 60 * 60 * 24 * 365.25)) * 100) / 100;
     }
     
     function formatAge(ageYears) {
@@ -483,7 +439,7 @@
         const months = Math.round((ageYears - years) * 12);
         if (months === 0) return `${years} years`;
         if (years === 0) return `${months} months`;
-        return `${years} yr ${months} mo`;
+        return `${years}y ${months}m`;
     }
     
     const rawData = {
@@ -512,14 +468,32 @@
         charlie: [
             { date: new Date('2025-12-15'), height: 108 }
         ],
-        abigail: []
+        abigail: [
+            { date: new Date('2025-12-15'), height: 84 }
+        ]
     };
     
     const data = {
-        emily: rawData.emily.map(d => ({ x: calcAge(dobs.emily, d.date), y: d.height, date: d.date })),
-        oliver: rawData.oliver.map(d => ({ x: calcAge(dobs.oliver, d.date), y: d.height, date: d.date })),
-        charlie: rawData.charlie.map(d => ({ x: calcAge(dobs.charlie, d.date), y: d.height, date: d.date })),
-        abigail: rawData.abigail.map(d => ({ x: calcAge(dobs.abigail, d.date), y: d.height, date: d.date }))
+        emily: rawData.emily.map(d => ({
+            x: calcAge(dobs.emily, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        oliver: rawData.oliver.map(d => ({
+            x: calcAge(dobs.oliver, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        charlie: rawData.charlie.map(d => ({
+            x: calcAge(dobs.charlie, d.date),
+            y: d.height,
+            date: d.date
+        })),
+        abigail: rawData.abigail.map(d => ({
+            x: calcAge(dobs.abigail, d.date),
+            y: d.height,
+            date: d.date
+        }))
     };
     
     const visibility = { emily: true, oliver: true, charlie: true, abigail: true };
@@ -624,7 +598,7 @@
                                 month: 'short', 
                                 year: 'numeric' 
                             });
-                            return [`${context.parsed.y} cm`, `Age: ${age}`, `Date: ${dateStr}`];
+                            return [`${context.parsed.y} cm`, `Age: ${age}`, dateStr];
                         }
                     }
                 }
