@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,680 +12,1286 @@
             --oliver: #4A9DB0;
             --charlie: #E8994A;
             --abigail: #A07DC0;
-        --bg-primary: #FFFEFA;
-        --bg-secondary: #FBF9F4;
-        --bg-card: #FFFFFF;
-        --ink: #2D2926;
-        --ink-soft: #4A4542;
-        --ink-muted: #6B665F;
-        --rule: #E8E2D9;
-        --grid: #EDE9E2;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --emily: #F27A97;
-            --oliver: #5DC0D6;
-            --charlie: #FFB366;
-            --abigail: #C4A3E0;
-            
-            --bg-primary: #1A1918;
-            --bg-secondary: #222120;
-            --bg-card: #2A2827;
-            --ink: #F5F2ED;
-            --ink-soft: #D4CFC6;
-            --ink-muted: #9E9890;
-            --rule: #3D3A37;
-            --grid: #333130;
+            --bg-primary: #FFFEFA;
+            --bg-secondary: #FBF9F4;
+            --bg-card: #FFFFFF;
+            --ink: #2D2926;
+            --ink-soft: #4A4542;
+            --ink-muted: #6B665F;
+            --rule: #E8E2D9;
+            --grid: #EDE9E2;
+            --shadow-subtle: 0 2px 8px rgba(45, 41, 38, 0.04);
+            --shadow-hover: 0 4px 12px rgba(45, 41, 38, 0.08);
         }
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-        font-family: 'Outfit', sans-serif;
-        font-weight: 400;
-        background: var(--bg-secondary);
-        color: var(--ink);
-        min-height: 100vh;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-    }
-    
-    .page {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 80px 40px;
-    }
-    
-    @media (max-width: 600px) {
-        .page { padding: 50px 24px; }
-    }
-    
-    header {
-        text-align: center;
-        margin-bottom: 70px;
-        animation: fadeIn 1s ease-out;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .overline {
-        font-size: 0.75rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 4px;
-        color: var(--ink-muted);
-        margin-bottom: 20px;
-    }
-    
-    h1 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(3rem, 8vw, 5.5rem);
-        font-weight: 300;
-        font-style: italic;
-        color: var(--ink);
-        line-height: 1;
-        margin-bottom: 24px;
-    }
-    
-    .divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        margin: 30px 0;
-    }
-    
-    .divider-line { width: 60px; height: 1px; background: var(--rule); }
-    .divider-diamond { width: 6px; height: 6px; background: var(--ink-muted); transform: rotate(45deg); }
-    
-    .intro {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.3rem;
-        color: var(--ink-soft);
-        max-width: 500px;
-        margin: 0 auto;
-        font-style: italic;
-    }
-    
-    .children-legend {
-        display: flex;
-        justify-content: center;
-        gap: 36px;
-        margin-bottom: 50px;
-        flex-wrap: wrap;
-        animation: fadeIn 1s ease-out 0.2s both;
-    }
-    
-    .child-tag {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        cursor: pointer;
-        transition: opacity 0.3s ease;
-        padding: 8px 0;
-    }
-    
-    .child-tag:hover { opacity: 0.7; }
-    .child-tag.inactive { opacity: 0.3; }
-    
-    .child-marker {
-        position: relative;
-        width: 36px;
-        height: 3px;
-    }
-    
-    .child-marker::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 100%;
-        height: 3px;
-        border-radius: 2px;
-    }
-    
-    .child-marker::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
-    
-    .child-tag.emily .child-marker::before,
-    .child-tag.emily .child-marker::after { background: var(--emily); }
-    .child-tag.oliver .child-marker::before,
-    .child-tag.oliver .child-marker::after { background: var(--oliver); }
-    .child-tag.charlie .child-marker::before,
-    .child-tag.charlie .child-marker::after { background: var(--charlie); }
-    .child-tag.abigail .child-marker::before,
-    .child-tag.abigail .child-marker::after { background: var(--abigail); }
-    
-    .child-info { text-align: left; }
-    
-    .child-name {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--ink);
-    }
-    
-    .child-dob {
-        font-size: 0.8rem;
-        color: var(--ink-soft);
-    }
-    
-    .chart-frame {
-        position: relative;
-        background: var(--bg-card);
-        border: 1px solid var(--rule);
-        padding: 40px 40px 30px 50px;
-        margin-bottom: 60px;
-        animation: fadeIn 1s ease-out 0.4s both;
-    }
-    
-    .chart-frame::before {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        right: -8px;
-        bottom: -8px;
-        border: 1px solid var(--rule);
-        z-index: -1;
-    }
-    
-    .chart-wrapper {
-        position: relative;
-        height: 480px;
-    }
-    
-    .stats-section {
-        animation: fadeIn 1s ease-out 0.6s both;
-    }
-    
-    .stats-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .stats-header h2 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.6rem;
-        font-weight: 400;
-        color: var(--ink);
-    }
-    
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-    
-    @media (max-width: 700px) {
-        .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    
-    .stat-cell {
-        background: var(--bg-card);
-        padding: 28px 24px;
-        text-align: center;
-        border-radius: 4px;
-        border: 1px solid var(--rule);
-        border-top: 4px solid transparent;
-    }
-    
-    .stat-cell.emily { border-top-color: var(--emily); }
-    .stat-cell.oliver { border-top-color: var(--oliver); }
-    .stat-cell.charlie { border-top-color: var(--charlie); }
-    .stat-cell.abigail { border-top-color: var(--abigail); }
-    
-    .stat-name {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.4rem;
-        font-weight: 600;
-        margin-bottom: 2px;
-    }
-    
-    .stat-name.emily { color: var(--emily); }
-    .stat-name.oliver { color: var(--oliver); }
-    .stat-name.charlie { color: var(--charlie); }
-    .stat-name.abigail { color: var(--abigail); }
-    
-    .stat-age {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--ink-muted);
-        margin-bottom: 14px;
-    }
-    
-    .stat-height {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 3rem;
-        font-weight: 400;
-        color: var(--ink);
-        line-height: 1;
-    }
-    
-    .stat-height span {
-        font-size: 1.3rem;
-        color: var(--ink-soft);
-    }
-    
-    .stat-note {
-        font-size: 0.85rem;
-        color: var(--ink-soft);
-        margin-top: 10px;
-    }
-    
-    footer {
-        text-align: center;
-        margin-top: 70px;
-        padding-top: 40px;
-        border-top: 1px solid var(--rule);
-    }
-    
-    footer p {
-        font-family: 'Cormorant Garamond', serif;
-        font-style: italic;
-        font-size: 1.1rem;
-        color: var(--ink-soft);
-    }
-</style>
-```
 
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --emily: #F27A97;
+                --oliver: #5DC0D6;
+                --charlie: #FFB366;
+                --abigail: #C4A3E0;
+                --bg-primary: #1A1918;
+                --bg-secondary: #222120;
+                --bg-card: #2A2827;
+                --ink: #F5F2ED;
+                --ink-soft: #D4CFC6;
+                --ink-muted: #9E9890;
+                --rule: #3D3A37;
+                --grid: #333130;
+                --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.15);
+                --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 400;
+            background: var(--bg-secondary);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 50px 24px; }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .overline {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--ink-muted);
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--ink);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .divider-line { width: 60px; height: 1px; background: var(--rule); }
+        .divider-diamond { width: 6px; height: 6px; background: var(--ink-muted); transform: rotate(45deg); }
+
+        .intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--ink-soft);
+            max-width: 550px;
+            margin: 0 auto;
+            font-style: italic;
+            transition: opacity 0.3s ease;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out 0.15s both;
+        }
+
+        .toggle-container {
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--rule);
+            border-radius: 30px;
+            padding: 4px;
+            position: relative;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            background: var(--bg-secondary);
+            border-radius: 26px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .toggle-option {
+            padding: 12px 28px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--ink-muted);
+            background: transparent;
+            border: none;
+            border-radius: 26px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .toggle-option:hover {
+            color: var(--ink-soft);
+        }
+
+        .toggle-option.active {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        /* Children Legend */
+        .children-legend {
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .child-tag {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            padding: 8px 0;
+        }
+
+        .child-tag:hover {
+            opacity: 0.8;
+            transform: scale(1.02);
+        }
+        .child-tag.inactive { opacity: 0.3; }
+
+        .child-marker {
+            position: relative;
+            width: 36px;
+            height: 3px;
+        }
+
+        .child-marker::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .child-marker::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .child-tag.emily .child-marker::before,
+        .child-tag.emily .child-marker::after { background: var(--emily); }
+        .child-tag.oliver .child-marker::before,
+        .child-tag.oliver .child-marker::after { background: var(--oliver); }
+        .child-tag.charlie .child-marker::before,
+        .child-tag.charlie .child-marker::after { background: var(--charlie); }
+        .child-tag.abigail .child-marker::before,
+        .child-tag.abigail .child-marker::after { background: var(--abigail); }
+
+        .child-info { text-align: left; }
+
+        .child-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .child-dob {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+        }
+
+        /* Chart */
+        .chart-frame {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--rule);
+            padding: 40px 40px 30px 50px;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .chart-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px solid var(--rule);
+            z-index: -1;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 480px;
+        }
+
+        .chart-legend-note {
+            display: none;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .chart-legend-note.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 2px;
+            background: var(--ink-muted);
+        }
+
+        .legend-line.dashed {
+            background: none;
+            border-top: 2px dashed var(--ink-muted);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .stats-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--ink);
+            transition: opacity 0.3s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stats-grid.hidden {
+            display: none;
+        }
+
+        @media (max-width: 700px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .stat-cell {
+            background: var(--bg-card);
+            padding: 28px 24px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid var(--rule);
+            border-top: 4px solid transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-cell:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-cell.emily { border-top-color: var(--emily); }
+        .stat-cell.oliver { border-top-color: var(--oliver); }
+        .stat-cell.charlie { border-top-color: var(--charlie); }
+        .stat-cell.abigail { border-top-color: var(--abigail); }
+
+        .stat-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .stat-name.emily { color: var(--emily); }
+        .stat-name.oliver { color: var(--oliver); }
+        .stat-name.charlie { color: var(--charlie); }
+        .stat-name.abigail { color: var(--abigail); }
+
+        .stat-age {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-muted);
+            margin-bottom: 14px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-muted);
+            margin-bottom: 12px;
+        }
+
+        .stat-height {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-height span {
+            font-size: 1.3rem;
+            color: var(--ink-soft);
+        }
+
+        .stat-note {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-top: 10px;
+        }
+
+        .stat-current {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+
+        .stat-projected {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-projected span {
+            font-size: 1.1rem;
+            color: var(--ink-soft);
+        }
+
+        .stat-percentile {
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            margin-top: 8px;
+        }
+
+        /* Methodology Section */
+        .methodology {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease-out, opacity 0.4s ease-out, margin 0.4s ease;
+            margin-top: 0;
+        }
+
+        .methodology.visible {
+            max-height: 3000px;
+            opacity: 1;
+            margin-top: 80px;
+        }
+
+        .methodology h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 700px) {
+            .method-grid { grid-template-columns: 1fr; }
+        }
+
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 28px;
+        }
+
+        .method-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .method-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .method-card p {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .method-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .method-card ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .method-card li {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .method-card strong {
+            color: var(--ink);
+        }
+
+        .percentile-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.85rem;
+        }
+
+        .percentile-table th,
+        .percentile-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .percentile-table th {
+            font-weight: 500;
+            color: var(--ink);
+            background: var(--bg-secondary);
+        }
+
+        .percentile-table td {
+            color: var(--ink-soft);
+        }
+
+        .source-link {
+            color: var(--oliver);
+            text-decoration: none;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            padding-top: 40px;
+            border-top: 1px solid var(--rule);
+        }
+
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--ink-soft);
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <div class="page">
         <header>
-            <p class="overline">A Family Record · 2020–2025</p>
+            <p class="overline" id="overline">A Family Record · 2020–2025</p>
             <h1>Growing Up</h1>
             <div class="divider">
                 <span class="divider-line"></span>
                 <span class="divider-diamond"></span>
                 <span class="divider-line"></span>
             </div>
-            <p class="intro">Measuring the heights of four children as they grow, charted by age for comparison</p>
+            <p class="intro" id="intro">Measuring the heights of four children as they grow, charted by age for comparison</p>
         </header>
 
-```
-    <div class="children-legend">
-        <div class="child-tag emily active" onclick="toggleChild('emily')">
-            <span class="child-marker"></span>
-            <div class="child-info">
-                <div class="child-name">Emily</div>
-                <div class="child-dob">b. 22 August 2014</div>
+        <div class="view-toggle">
+            <div class="toggle-container">
+                <div class="toggle-slider" id="toggleSlider"></div>
+                <button class="toggle-option active" data-mode="current" onclick="setMode('current')">Current</button>
+                <button class="toggle-option" data-mode="prediction" onclick="setMode('prediction')">Prediction</button>
             </div>
         </div>
-        <div class="child-tag oliver active" onclick="toggleChild('oliver')">
-            <span class="child-marker"></span>
-            <div class="child-info">
-                <div class="child-name">Oliver</div>
-                <div class="child-dob">b. 8 November 2016</div>
+
+        <div class="children-legend">
+            <div class="child-tag emily active" onclick="toggleChild('emily')">
+                <span class="child-marker"></span>
+                <div class="child-info">
+                    <div class="child-name">Emily</div>
+                    <div class="child-dob">b. 22 August 2014</div>
+                </div>
+            </div>
+            <div class="child-tag oliver active" onclick="toggleChild('oliver')">
+                <span class="child-marker"></span>
+                <div class="child-info">
+                    <div class="child-name">Oliver</div>
+                    <div class="child-dob">b. 8 November 2016</div>
+                </div>
+            </div>
+            <div class="child-tag charlie active" onclick="toggleChild('charlie')">
+                <span class="child-marker"></span>
+                <div class="child-info">
+                    <div class="child-name">Charlie</div>
+                    <div class="child-dob">b. 5 February 2019</div>
+                </div>
+            </div>
+            <div class="child-tag abigail active" onclick="toggleChild('abigail')">
+                <span class="child-marker"></span>
+                <div class="child-info">
+                    <div class="child-name">Abigail</div>
+                    <div class="child-dob">b. 7 July 2022</div>
+                </div>
             </div>
         </div>
-        <div class="child-tag charlie active" onclick="toggleChild('charlie')">
-            <span class="child-marker"></span>
-            <div class="child-info">
-                <div class="child-name">Charlie</div>
-                <div class="child-dob">b. 5 February 2019</div>
+
+        <div class="chart-frame">
+            <div class="chart-wrapper">
+                <canvas id="growthChart"></canvas>
+            </div>
+            <div class="chart-legend-note" id="chartLegend">
+                <div class="legend-item">
+                    <span class="legend-line"></span>
+                    <span>Actual measurements</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line dashed"></span>
+                    <span>Projected growth</span>
+                </div>
             </div>
         </div>
-        <div class="child-tag abigail active" onclick="toggleChild('abigail')">
-            <span class="child-marker"></span>
-            <div class="child-info">
-                <div class="child-name">Abigail</div>
-                <div class="child-dob">b. 7 July 2022</div>
+
+        <section class="stats-section">
+            <div class="stats-header">
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-diamond"></span>
+                    <span class="divider-line"></span>
+                </div>
+                <h2 id="statsTitle">Latest Measurements · December 2025</h2>
             </div>
-        </div>
-    </div>
-    
-    <div class="chart-frame">
-        <div class="chart-wrapper">
-            <canvas id="growthChart"></canvas>
-        </div>
-    </div>
-    
-    <section class="stats-section">
-        <div class="stats-header">
+
+            <!-- Current Stats -->
+            <div class="stats-grid" id="statsCurrent">
+                <div class="stat-cell emily">
+                    <div class="stat-name emily">Emily</div>
+                    <div class="stat-age">11 years 4 months</div>
+                    <div class="stat-height">152<span>cm</span></div>
+                    <div class="stat-note">+61cm since first measure</div>
+                </div>
+                <div class="stat-cell oliver">
+                    <div class="stat-name oliver">Oliver</div>
+                    <div class="stat-age">9 years 1 month</div>
+                    <div class="stat-height">137<span>cm</span></div>
+                    <div class="stat-note">+52cm since first measure</div>
+                </div>
+                <div class="stat-cell charlie">
+                    <div class="stat-name charlie">Charlie</div>
+                    <div class="stat-age">6 years 10 months</div>
+                    <div class="stat-height">108<span>cm</span></div>
+                    <div class="stat-note">First measurement</div>
+                </div>
+                <div class="stat-cell abigail">
+                    <div class="stat-name abigail">Abigail</div>
+                    <div class="stat-age">3 years 5 months</div>
+                    <div class="stat-height">84<span>cm</span></div>
+                    <div class="stat-note">First measurement</div>
+                </div>
+            </div>
+
+            <!-- Projected Stats -->
+            <div class="stats-grid hidden" id="statsProjected">
+                <div class="stat-cell emily">
+                    <div class="stat-name emily">Emily</div>
+                    <div class="stat-label">Current → Projected</div>
+                    <div class="stat-current">152cm at 11y 4m</div>
+                    <div class="stat-projected" id="emilyProjected">168<span>cm</span></div>
+                    <div class="stat-percentile" id="emilyPercentile">~75th percentile</div>
+                </div>
+                <div class="stat-cell oliver">
+                    <div class="stat-name oliver">Oliver</div>
+                    <div class="stat-label">Current → Projected</div>
+                    <div class="stat-current">137cm at 9y 1m</div>
+                    <div class="stat-projected" id="oliverProjected">178<span>cm</span></div>
+                    <div class="stat-percentile" id="oliverPercentile">~60th percentile</div>
+                </div>
+                <div class="stat-cell charlie">
+                    <div class="stat-name charlie">Charlie</div>
+                    <div class="stat-label">Current → Projected</div>
+                    <div class="stat-current">108cm at 6y 10m</div>
+                    <div class="stat-projected" id="charlieProjected">165<span>cm</span></div>
+                    <div class="stat-percentile" id="charliePercentile">~15th percentile</div>
+                </div>
+                <div class="stat-cell abigail">
+                    <div class="stat-name abigail">Abigail</div>
+                    <div class="stat-label">Current → Projected</div>
+                    <div class="stat-current">84cm at 3y 5m</div>
+                    <div class="stat-projected" id="abigailProjected">157<span>cm</span></div>
+                    <div class="stat-percentile" id="abigailPercentile">~25th percentile</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="methodology" id="methodology">
             <div class="divider">
                 <span class="divider-line"></span>
                 <span class="divider-diamond"></span>
                 <span class="divider-line"></span>
             </div>
-            <h2>Latest Measurements · December 2025</h2>
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-cell emily">
-                <div class="stat-name emily">Emily</div>
-                <div class="stat-age">11 years 4 months</div>
-                <div class="stat-height">152<span>cm</span></div>
-                <div class="stat-note">+61cm since first measure</div>
-            </div>
-            <div class="stat-cell oliver">
-                <div class="stat-name oliver">Oliver</div>
-                <div class="stat-age">9 years 1 month</div>
-                <div class="stat-height">137<span>cm</span></div>
-                <div class="stat-note">+52cm since first measure</div>
-            </div>
-            <div class="stat-cell charlie">
-                <div class="stat-name charlie">Charlie</div>
-                <div class="stat-age">6 years 10 months</div>
-                <div class="stat-height">108<span>cm</span></div>
-                <div class="stat-note">First measurement</div>
-            </div>
-            <div class="stat-cell abigail">
-                <div class="stat-name abigail">Abigail</div>
-                <div class="stat-age">3 years 5 months</div>
-                <div class="stat-height">84<span>cm</span></div>
-                <div class="stat-note">First measurement</div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <p>Hover over points to reveal measurements</p>
-    </footer>
-</div>
+            <h2>How We Calculate Projected Heights</h2>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+            <div class="method-grid">
+                <div class="method-card">
+                    <h3>The CDC Growth Charts</h3>
+                    <p>The projections use data from the <strong>CDC 2000 Growth Charts</strong>, which are the standard reference used by pediatricians across the United States and internationally.</p>
+                    <p>These charts were developed by the National Center for Health Statistics (NCHS) using data from five national health examination surveys spanning 1963-1994, representing measurements from thousands of children.</p>
+                    <p>The charts provide height (stature) percentiles for children aged 2-20 years, separated by sex.</p>
+                </div>
 
-<script>
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const colors = {
-        emily: isDarkMode ? '#F27A97' : '#E25D7D',
-        oliver: isDarkMode ? '#5DC0D6' : '#4A9DB0',
-        charlie: isDarkMode ? '#FFB366' : '#E8994A',
-        abigail: isDarkMode ? '#C4A3E0' : '#A07DC0'
-    };
-    
-    const chartColors = {
-        grid: isDarkMode ? '#333130' : '#EDE9E2',
-        text: isDarkMode ? '#D4CFC6' : '#5C5852',
-        tooltipBg: isDarkMode ? '#F5F2ED' : '#2D2926',
-        tooltipText: isDarkMode ? '#1A1918' : '#FFFFFF',
-        pointBorder: isDarkMode ? '#2A2827' : '#FFFFFF'
-    };
-    
-    const dobs = {
-        emily: new Date('2014-08-22'),
-        oliver: new Date('2016-11-08'),
-        charlie: new Date('2019-02-05'),
-        abigail: new Date('2022-07-07')
-    };
-    
-    function calcAge(dob, measureDate) {
-        const ms = measureDate - dob;
-        return Math.round((ms / (1000 * 60 * 60 * 24 * 365.25)) * 100) / 100;
-    }
-    
-    function formatAge(ageYears) {
-        const years = Math.floor(ageYears);
-        const months = Math.round((ageYears - years) * 12);
-        if (months === 0) return `${years} years`;
-        if (years === 0) return `${months} months`;
-        return `${years}y ${months}m`;
-    }
-    
-    const rawData = {
-        emily: [
-            { date: new Date('2020-02-15'), height: 91 },
-            { date: new Date('2022-05-15'), height: 120 },
-            { date: new Date('2022-10-15'), height: 122 },
-            { date: new Date('2023-10-15'), height: 131 },
-            { date: new Date('2024-01-15'), height: 135 },
-            { date: new Date('2024-04-15'), height: 139 },
-            { date: new Date('2024-10-15'), height: 142 },
-            { date: new Date('2025-01-15'), height: 145 },
-            { date: new Date('2025-02-15'), height: 147 },
-            { date: new Date('2025-12-15'), height: 152 }
-        ],
-        oliver: [
-            { date: new Date('2020-02-15'), height: 85 },
-            { date: new Date('2022-05-15'), height: 99 },
-            { date: new Date('2022-10-15'), height: 103 },
-            { date: new Date('2024-04-15'), height: 118 },
-            { date: new Date('2024-10-15'), height: 125 },
-            { date: new Date('2025-01-15'), height: 127 },
-            { date: new Date('2025-02-15'), height: 129 },
-            { date: new Date('2025-12-15'), height: 137 }
-        ],
-        charlie: [
-            { date: new Date('2025-12-15'), height: 108 }
-        ],
-        abigail: [
-            { date: new Date('2025-12-15'), height: 84 }
-        ]
-    };
-    
-    const data = {
-        emily: rawData.emily.map(d => ({
-            x: calcAge(dobs.emily, d.date),
-            y: d.height,
-            date: d.date
-        })),
-        oliver: rawData.oliver.map(d => ({
-            x: calcAge(dobs.oliver, d.date),
-            y: d.height,
-            date: d.date
-        })),
-        charlie: rawData.charlie.map(d => ({
-            x: calcAge(dobs.charlie, d.date),
-            y: d.height,
-            date: d.date
-        })),
-        abigail: rawData.abigail.map(d => ({
-            x: calcAge(dobs.abigail, d.date),
-            y: d.height,
-            date: d.date
-        }))
-    };
-    
-    const visibility = { emily: true, oliver: true, charlie: true, abigail: true };
-    
-    const ctx = document.getElementById('growthChart').getContext('2d');
-    
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            datasets: [
-                {
-                    label: 'Emily',
-                    data: data.emily,
-                    borderColor: colors.emily,
-                    backgroundColor: colors.emily,
-                    borderWidth: 2.5,
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: colors.emily,
-                    pointBorderColor: chartColors.pointBorder,
-                    pointBorderWidth: 2,
-                    tension: 0.3,
-                    fill: false
-                },
-                {
-                    label: 'Oliver',
-                    data: data.oliver,
-                    borderColor: colors.oliver,
-                    backgroundColor: colors.oliver,
-                    borderWidth: 2.5,
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: colors.oliver,
-                    pointBorderColor: chartColors.pointBorder,
-                    pointBorderWidth: 2,
-                    tension: 0.3,
-                    fill: false
-                },
-                {
-                    label: 'Charlie',
-                    data: data.charlie,
-                    borderColor: colors.charlie,
-                    backgroundColor: colors.charlie,
-                    borderWidth: 2.5,
-                    pointRadius: 7,
-                    pointHoverRadius: 10,
-                    pointBackgroundColor: colors.charlie,
-                    pointBorderColor: chartColors.pointBorder,
-                    pointBorderWidth: 2,
-                    tension: 0.3,
-                    fill: false
-                },
-                {
-                    label: 'Abigail',
-                    data: data.abigail,
-                    borderColor: colors.abigail,
-                    backgroundColor: colors.abigail,
-                    borderWidth: 2.5,
-                    pointRadius: 7,
-                    pointHoverRadius: 10,
-                    pointBackgroundColor: colors.abigail,
-                    pointBorderColor: chartColors.pointBorder,
-                    pointBorderWidth: 2,
-                    tension: 0.3,
-                    fill: false
-                }
+                <div class="method-card">
+                    <h3>The Percentile Method</h3>
+                    <p>Children tend to <strong>track along the same percentile</strong> throughout their growth. A child at the 75th percentile at age 5 will typically remain near the 75th percentile at age 15.</p>
+                    <p>Our projection method:</p>
+                    <ul>
+                        <li>Determine the child's current percentile based on their latest height and age</li>
+                        <li>Look up what height that same percentile corresponds to at age 20</li>
+                        <li>Generate intermediate points to create a smooth growth curve</li>
+                    </ul>
+                </div>
+
+                <div class="method-card">
+                    <h3>When Girls Stop Growing</h3>
+                    <p>Girls typically reach their <strong>adult height by age 14-16</strong>. This is because:</p>
+                    <ul>
+                        <li><strong>Earlier puberty:</strong> Girls begin puberty around ages 8-13, about 1-2 years before boys</li>
+                        <li><strong>Growth plate fusion:</strong> Estrogen triggers the closure of growth plates (epiphyseal plates) in bones</li>
+                        <li><strong>Peak growth spurt:</strong> Girls experience their fastest growth around age 11-12, typically gaining 8-10cm in their peak year</li>
+                    </ul>
+                    <p>The CDC data shows minimal height gain after age 15 for girls — typically less than 1cm total between ages 15-20.</p>
+                </div>
+
+                <div class="method-card">
+                    <h3>When Boys Stop Growing</h3>
+                    <p>Boys typically reach their <strong>adult height by age 17-18</strong>. The later timing is due to:</p>
+                    <ul>
+                        <li><strong>Later puberty:</strong> Boys begin puberty around ages 9-14</li>
+                        <li><strong>Longer growth period:</strong> Testosterone is eventually converted to estrogen, which closes growth plates, but this happens later than in girls</li>
+                        <li><strong>Peak growth spurt:</strong> Boys experience their fastest growth around age 13-14, often gaining 10-12cm in their peak year</li>
+                    </ul>
+                    <p>This later growth spurt is why boys end up taller on average — they have 2+ extra years of growth before their plates fuse.</p>
+                </div>
+
+                <div class="method-card full-width">
+                    <h3>CDC Percentile Reference Data</h3>
+                    <p>Below are example heights at age 20 for different percentiles, showing typical adult heights:</p>
+                    <table class="percentile-table">
+                        <thead>
+                            <tr>
+                                <th>Percentile</th>
+                                <th>Girls at Age 20</th>
+                                <th>Boys at Age 20</th>
+                                <th>Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5th</td>
+                                <td>150.3 cm (4'11")</td>
+                                <td>165.3 cm (5'5")</td>
+                                <td>Shorter than 95% of peers</td>
+                            </tr>
+                            <tr>
+                                <td>25th</td>
+                                <td>158.9 cm (5'3")</td>
+                                <td>175.6 cm (5'9")</td>
+                                <td>Shorter than 75% of peers</td>
+                            </tr>
+                            <tr>
+                                <td>50th</td>
+                                <td>164.6 cm (5'5")</td>
+                                <td>182.2 cm (6'0")</td>
+                                <td>Average height</td>
+                            </tr>
+                            <tr>
+                                <td>75th</td>
+                                <td>170.2 cm (5'7")</td>
+                                <td>188.8 cm (6'2")</td>
+                                <td>Taller than 75% of peers</td>
+                            </tr>
+                            <tr>
+                                <td>95th</td>
+                                <td>177.2 cm (5'10")</td>
+                                <td>197.0 cm (6'6")</td>
+                                <td>Taller than 95% of peers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="method-card full-width">
+                    <h3>Accuracy & Limitations</h3>
+                    <p>The percentile method is widely used clinically but has important limitations:</p>
+                    <ul>
+                        <li><strong>Typical accuracy:</strong> ±5cm (2 inches) for predictions made in mid-childhood. Accuracy improves as children get older and closer to their adult height.</li>
+                        <li><strong>Percentile crossing:</strong> Some children do shift percentiles, particularly around puberty. Early or late puberty can temporarily push a child above or below their eventual percentile.</li>
+                        <li><strong>Genetic factors:</strong> Parental heights are strong predictors. The "mid-parental height" method (averaging parents' heights with adjustment) can refine predictions but requires parental data.</li>
+                        <li><strong>Nutrition & health:</strong> Chronic illness, malnutrition, or hormonal conditions can affect growth trajectories.</li>
+                        <li><strong>Population differences:</strong> CDC charts are based primarily on U.S. data. Children from different ethnic backgrounds may have slightly different growth patterns.</li>
+                    </ul>
+                    <p>For the most accurate predictions, pediatric endocrinologists may use <strong>bone age X-rays</strong> (the Greulich-Pyle or Tanner-Whitehouse methods) to assess skeletal maturity, which correlates with remaining growth potential.</p>
+                </div>
+
+                <div class="method-card full-width">
+                    <h3>Data Sources</h3>
+                    <p>The percentile data used in this visualization comes from:</p>
+                    <ul>
+                        <li><strong>CDC Growth Charts (2000):</strong> Stature-for-age percentiles, ages 2-20 years. Published by the National Center for Health Statistics.</li>
+                        <li><strong>Source:</strong> <a href="https://www.cdc.gov/growthcharts/cdc-data-files.htm" class="source-link" target="_blank">CDC Growth Charts Data Files</a> — includes LMS parameters for calculating exact percentiles.</li>
+                        <li><strong>Reference:</strong> Kuczmarski RJ, et al. "2000 CDC growth charts for the United States: Methods and development." <em>Vital and Health Statistics</em>, Series 11, Number 246, 2002.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p id="footerText">Hover over points to reveal measurements</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        // State
+        const state = {
+            mode: 'current',
+            visibility: { emily: true, oliver: true, charlie: true, abigail: true }
+        };
+
+        // Theme detection
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Colors
+        const colors = {
+            emily: isDarkMode ? '#F27A97' : '#E25D7D',
+            oliver: isDarkMode ? '#5DC0D6' : '#4A9DB0',
+            charlie: isDarkMode ? '#FFB366' : '#E8994A',
+            abigail: isDarkMode ? '#C4A3E0' : '#A07DC0'
+        };
+
+        const chartColors = {
+            grid: isDarkMode ? '#333130' : '#EDE9E2',
+            text: isDarkMode ? '#D4CFC6' : '#5C5852',
+            tooltipBg: isDarkMode ? '#F5F2ED' : '#2D2926',
+            tooltipText: isDarkMode ? '#1A1918' : '#FFFFFF',
+            pointBorder: isDarkMode ? '#2A2827' : '#FFFFFF'
+        };
+
+        // Child data
+        const children = {
+            emily: { dob: new Date('2014-08-22'), isFemale: true },
+            oliver: { dob: new Date('2016-11-08'), isFemale: false },
+            charlie: { dob: new Date('2019-02-05'), isFemale: false },
+            abigail: { dob: new Date('2022-07-07'), isFemale: true }
+        };
+
+        // Raw measurements
+        const rawData = {
+            emily: [
+                { date: new Date('2020-02-15'), height: 91 },
+                { date: new Date('2022-05-15'), height: 120 },
+                { date: new Date('2022-10-15'), height: 122 },
+                { date: new Date('2023-10-15'), height: 131 },
+                { date: new Date('2024-01-15'), height: 135 },
+                { date: new Date('2024-04-15'), height: 139 },
+                { date: new Date('2024-10-15'), height: 142 },
+                { date: new Date('2025-01-15'), height: 145 },
+                { date: new Date('2025-02-15'), height: 147 },
+                { date: new Date('2025-12-15'), height: 152 }
+            ],
+            oliver: [
+                { date: new Date('2020-02-15'), height: 85 },
+                { date: new Date('2022-05-15'), height: 99 },
+                { date: new Date('2022-10-15'), height: 103 },
+                { date: new Date('2024-04-15'), height: 118 },
+                { date: new Date('2024-10-15'), height: 125 },
+                { date: new Date('2025-01-15'), height: 127 },
+                { date: new Date('2025-02-15'), height: 129 },
+                { date: new Date('2025-12-15'), height: 137 }
+            ],
+            charlie: [
+                { date: new Date('2025-12-15'), height: 108 }
+            ],
+            abigail: [
+                { date: new Date('2025-12-15'), height: 84 }
             ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                intersect: false,
-                mode: 'nearest'
+        };
+
+        // CDC Growth Chart Data
+        const girlsHeightByAge = {
+            2: [81.6, 82.9, 85.0, 87.6, 90.2, 92.4, 93.8],
+            3: [89.2, 90.8, 93.3, 96.4, 99.5, 102.1, 103.8],
+            4: [95.8, 97.6, 100.5, 104.0, 107.5, 110.5, 112.4],
+            5: [101.6, 103.6, 107.0, 110.9, 114.8, 118.1, 120.2],
+            6: [107.0, 109.2, 113.0, 117.3, 121.6, 125.2, 127.6],
+            7: [112.2, 114.6, 118.8, 123.5, 128.1, 132.1, 134.6],
+            8: [117.2, 119.9, 124.4, 129.5, 134.6, 138.9, 141.6],
+            9: [122.2, 125.1, 130.1, 135.6, 141.1, 145.8, 148.7],
+            10: [127.3, 130.5, 136.0, 142.0, 148.0, 153.0, 156.1],
+            11: [133.0, 136.5, 142.4, 148.9, 155.4, 160.6, 163.8],
+            12: [139.2, 142.9, 149.1, 155.8, 162.4, 167.7, 170.8],
+            13: [144.2, 147.9, 154.0, 160.5, 166.9, 172.0, 175.0],
+            14: [147.3, 150.8, 156.6, 162.8, 168.9, 173.8, 176.6],
+            15: [148.9, 152.3, 157.9, 163.8, 169.6, 174.4, 177.0],
+            16: [149.6, 152.9, 158.4, 164.1, 169.8, 174.5, 177.0],
+            17: [149.9, 153.2, 158.6, 164.3, 169.9, 174.5, 177.0],
+            18: [150.1, 153.4, 158.7, 164.4, 170.0, 174.6, 177.1],
+            19: [150.2, 153.5, 158.8, 164.5, 170.1, 174.7, 177.1],
+            20: [150.3, 153.6, 158.9, 164.6, 170.2, 174.8, 177.2]
+        };
+
+        const boysHeightByAge = {
+            2: [82.5, 83.9, 86.1, 88.7, 91.4, 93.7, 95.2],
+            3: [90.4, 92.1, 94.6, 97.8, 100.9, 103.7, 105.4],
+            4: [97.3, 99.2, 102.2, 105.7, 109.3, 112.5, 114.4],
+            5: [103.4, 105.5, 108.9, 112.9, 116.9, 120.4, 122.6],
+            6: [109.2, 111.5, 115.3, 119.7, 124.0, 127.9, 130.3],
+            7: [114.8, 117.3, 121.5, 126.2, 131.0, 135.2, 137.8],
+            8: [120.2, 122.9, 127.5, 132.6, 137.7, 142.3, 145.0],
+            9: [125.3, 128.3, 133.3, 138.8, 144.3, 149.2, 152.1],
+            10: [130.1, 133.4, 138.8, 144.8, 150.7, 156.0, 159.1],
+            11: [134.6, 138.2, 144.2, 150.7, 157.2, 162.9, 166.2],
+            12: [139.3, 143.4, 150.0, 157.2, 164.3, 170.4, 173.9],
+            13: [144.8, 149.4, 156.6, 164.4, 172.1, 178.5, 182.2],
+            14: [151.5, 156.4, 163.9, 171.8, 179.6, 186.0, 189.6],
+            15: [157.5, 162.2, 169.5, 177.0, 184.4, 190.5, 193.9],
+            16: [161.5, 165.9, 172.7, 179.8, 186.8, 192.5, 195.7],
+            17: [163.6, 167.8, 174.3, 181.1, 187.8, 193.3, 196.4],
+            18: [164.6, 168.7, 175.1, 181.8, 188.4, 193.8, 196.8],
+            19: [165.0, 169.1, 175.4, 182.0, 188.6, 194.0, 196.9],
+            20: [165.3, 169.3, 175.6, 182.2, 188.8, 194.1, 197.0]
+        };
+
+        const percentiles = [5, 10, 25, 50, 75, 90, 95];
+
+        // Helper functions
+        function calcAge(dob, measureDate) {
+            const ms = measureDate - dob;
+            return Math.round((ms / (1000 * 60 * 60 * 24 * 365.25)) * 100) / 100;
+        }
+
+        function formatAge(ageYears) {
+            const years = Math.floor(ageYears);
+            const months = Math.round((ageYears - years) * 12);
+            if (months === 0) return `${years} years`;
+            if (years === 0) return `${months} months`;
+            return `${years}y ${months}m`;
+        }
+
+        function findPercentile(height, age, isFemale) {
+            const data = isFemale ? girlsHeightByAge : boysHeightByAge;
+            const nearestAge = Math.min(20, Math.max(2, Math.round(age)));
+            const heights = data[nearestAge];
+
+            if (height <= heights[0]) return 5;
+            if (height >= heights[6]) return 95;
+
+            for (let i = 0; i < heights.length - 1; i++) {
+                if (height >= heights[i] && height <= heights[i + 1]) {
+                    const ratio = (height - heights[i]) / (heights[i + 1] - heights[i]);
+                    return percentiles[i] + ratio * (percentiles[i + 1] - percentiles[i]);
+                }
+            }
+            return 50;
+        }
+
+        function getHeightAtPercentile(percentile, age, isFemale) {
+            const data = isFemale ? girlsHeightByAge : boysHeightByAge;
+            const nearestAge = Math.min(20, Math.max(2, Math.round(age)));
+            const heights = data[nearestAge];
+
+            if (percentile <= 5) return heights[0];
+            if (percentile >= 95) return heights[6];
+
+            for (let i = 0; i < percentiles.length - 1; i++) {
+                if (percentile >= percentiles[i] && percentile <= percentiles[i + 1]) {
+                    const ratio = (percentile - percentiles[i]) / (percentiles[i + 1] - percentiles[i]);
+                    return heights[i] + ratio * (heights[i + 1] - heights[i]);
+                }
+            }
+            return heights[3];
+        }
+
+        function generateProjection(currentAge, currentHeight, isFemale) {
+            const percentile = findPercentile(currentHeight, currentAge, isFemale);
+            const projection = [];
+
+            for (let age = Math.ceil(currentAge); age <= 20; age++) {
+                projection.push({
+                    x: age,
+                    y: Math.round(getHeightAtPercentile(percentile, age, isFemale) * 10) / 10,
+                    projected: true
+                });
+            }
+            return { projection, percentile };
+        }
+
+        // Process data
+        const data = {};
+        const projections = {};
+
+        Object.keys(children).forEach(name => {
+            data[name] = rawData[name].map(d => ({
+                x: calcAge(children[name].dob, d.date),
+                y: d.height,
+                date: d.date,
+                projected: false
+            }));
+
+            const last = data[name][data[name].length - 1];
+            projections[name] = generateProjection(last.x, last.y, children[name].isFemale);
+        });
+
+        // Update projected stats display
+        function updateProjectedStats() {
+            Object.keys(projections).forEach(name => {
+                const proj = projections[name];
+                const height20 = Math.round(getHeightAtPercentile(proj.percentile, 20, children[name].isFemale));
+                document.getElementById(`${name}Projected`).innerHTML = `${height20}<span>cm</span>`;
+                document.getElementById(`${name}Percentile`).textContent = `~${Math.round(proj.percentile)}th percentile`;
+            });
+        }
+        updateProjectedStats();
+
+        // Chart setup
+        const ctx = document.getElementById('growthChart').getContext('2d');
+
+        function createDataset(name, isProjection = false) {
+            const color = colors[name];
+            const baseData = isProjection
+                ? [data[name][data[name].length - 1], ...projections[name].projection]
+                : data[name];
+            const pointSize = (name === 'charlie' || name === 'abigail') ? 7 : 5;
+
+            return {
+                label: isProjection ? `${name} (projected)` : name.charAt(0).toUpperCase() + name.slice(1),
+                data: baseData,
+                borderColor: color,
+                backgroundColor: color,
+                borderWidth: isProjection ? 2 : 2.5,
+                borderDash: isProjection ? [8, 4] : [],
+                pointRadius: isProjection ? 0 : pointSize,
+                pointHoverRadius: isProjection ? 6 : pointSize + 3,
+                pointBackgroundColor: color,
+                pointBorderColor: chartColors.pointBorder,
+                pointBorderWidth: 2,
+                tension: 0.3,
+                fill: false,
+                hidden: isProjection
+            };
+        }
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    createDataset('emily'),
+                    createDataset('emily', true),
+                    createDataset('oliver'),
+                    createDataset('oliver', true),
+                    createDataset('charlie'),
+                    createDataset('charlie', true),
+                    createDataset('abigail'),
+                    createDataset('abigail', true)
+                ]
             },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: chartColors.tooltipBg,
-                    titleColor: chartColors.tooltipText,
-                    bodyColor: chartColors.tooltipText,
-                    titleFont: { 
-                        family: "'Cormorant Garamond', serif",
-                        size: 18,
-                        weight: '600'
-                    },
-                    bodyFont: { 
-                        family: "'Outfit', sans-serif",
-                        size: 13,
-                        weight: '400'
-                    },
-                    padding: 16,
-                    cornerRadius: 2,
-                    displayColors: false,
-                    callbacks: {
-                        title: function(context) {
-                            return context[0].dataset.label;
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'nearest'
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: chartColors.tooltipBg,
+                        titleColor: chartColors.tooltipText,
+                        bodyColor: chartColors.tooltipText,
+                        titleFont: {
+                            family: "'Cormorant Garamond', serif",
+                            size: 18,
+                            weight: '600'
                         },
-                        label: function(context) {
-                            const age = formatAge(context.parsed.x);
-                            const dateStr = context.raw.date.toLocaleDateString('en-GB', { 
-                                month: 'short', 
-                                year: 'numeric' 
-                            });
-                            return [`${context.parsed.y} cm`, `Age: ${age}`, dateStr];
+                        bodyFont: {
+                            family: "'Outfit', sans-serif",
+                            size: 13,
+                            weight: '400'
+                        },
+                        padding: 16,
+                        cornerRadius: 2,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].dataset.label.replace(' (projected)', '');
+                            },
+                            label: function(context) {
+                                const isProjected = context.dataset.label.includes('projected') || context.raw.projected;
+                                const age = formatAge(context.parsed.x);
+                                const lines = [
+                                    `${Math.round(context.parsed.y)} cm`,
+                                    `Age: ${age}`
+                                ];
+                                if (isProjected) {
+                                    lines.push('(Projected)');
+                                } else if (context.raw.date) {
+                                    lines.push(context.raw.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }));
+                                }
+                                return lines;
+                            }
                         }
                     }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'linear',
-                    min: 0,
-                    max: 12,
-                    grid: {
-                        color: chartColors.grid,
-                        drawBorder: false,
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        font: {
-                            family: "'Outfit', sans-serif",
-                            size: 12,
-                            weight: '400'
-                        },
-                        color: chartColors.text,
-                        callback: value => value + ' yrs',
-                        stepSize: 2
-                    },
-                    title: {
-                        display: true,
-                        text: 'Age',
-                        font: {
-                            family: "'Cormorant Garamond', serif",
-                            size: 15,
-                            weight: '500',
-                            style: 'italic'
-                        },
-                        color: chartColors.text,
-                        padding: { top: 16 }
-                    },
-                    border: { display: false }
                 },
-                y: {
-                    min: 70,
-                    max: 160,
-                    grid: {
-                        color: chartColors.grid,
-                        drawBorder: false,
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        font: {
-                            family: "'Outfit', sans-serif",
-                            size: 12,
-                            weight: '400'
+                scales: {
+                    x: {
+                        type: 'linear',
+                        min: 0,
+                        max: 12,
+                        grid: {
+                            color: chartColors.grid,
+                            drawBorder: false,
+                            lineWidth: 1
                         },
-                        color: chartColors.text,
-                        callback: value => value + ' cm',
-                        stepSize: 15
-                    },
-                    title: {
-                        display: true,
-                        text: 'Height',
-                        font: {
-                            family: "'Cormorant Garamond', serif",
-                            size: 15,
-                            weight: '500',
-                            style: 'italic'
+                        ticks: {
+                            font: {
+                                family: "'Outfit', sans-serif",
+                                size: 12,
+                                weight: '400'
+                            },
+                            color: chartColors.text,
+                            callback: value => value + ' yrs',
+                            stepSize: 2
                         },
-                        color: chartColors.text,
-                        padding: { bottom: 16 }
+                        title: {
+                            display: true,
+                            text: 'Age',
+                            font: {
+                                family: "'Cormorant Garamond', serif",
+                                size: 15,
+                                weight: '500',
+                                style: 'italic'
+                            },
+                            color: chartColors.text,
+                            padding: { top: 16 }
+                        },
+                        border: { display: false }
                     },
-                    border: { display: false }
+                    y: {
+                        min: 70,
+                        max: 160,
+                        grid: {
+                            color: chartColors.grid,
+                            drawBorder: false,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Outfit', sans-serif",
+                                size: 12,
+                                weight: '400'
+                            },
+                            color: chartColors.text,
+                            callback: value => value + ' cm',
+                            stepSize: 15
+                        },
+                        title: {
+                            display: true,
+                            text: 'Height',
+                            font: {
+                                family: "'Cormorant Garamond', serif",
+                                size: 15,
+                                weight: '500',
+                                style: 'italic'
+                            },
+                            color: chartColors.text,
+                            padding: { bottom: 16 }
+                        },
+                        border: { display: false }
+                    }
+                },
+                animation: {
+                    duration: 800,
+                    easing: 'easeOutQuart'
                 }
-            },
-            animation: {
-                duration: 1200,
-                easing: 'easeOutQuart'
             }
-        }
-    });
-    
-    function toggleChild(name) {
-        visibility[name] = !visibility[name];
-        const index = ['emily', 'oliver', 'charlie', 'abigail'].indexOf(name);
-        chart.getDatasetMeta(index).hidden = !visibility[name];
-        chart.update();
-        
-        const tag = document.querySelector(`.child-tag.${name}`);
-        tag.classList.toggle('active', visibility[name]);
-        tag.classList.toggle('inactive', !visibility[name]);
-    }
-</script>
-```
+        });
 
+        // Dataset indices
+        const datasetIndices = {
+            emily: { actual: 0, projected: 1 },
+            oliver: { actual: 2, projected: 3 },
+            charlie: { actual: 4, projected: 5 },
+            abigail: { actual: 6, projected: 7 }
+        };
+
+        // Toggle slider positioning
+        function updateToggleSlider() {
+            const slider = document.getElementById('toggleSlider');
+            const activeBtn = document.querySelector(`.toggle-option[data-mode="${state.mode}"]`);
+            const container = document.querySelector('.toggle-container');
+
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = activeBtn.getBoundingClientRect();
+
+            slider.style.width = `${btnRect.width}px`;
+            slider.style.transform = `translateX(${btnRect.left - containerRect.left - 4}px)`;
+        }
+
+        // Initialize toggle slider
+        setTimeout(updateToggleSlider, 100);
+        window.addEventListener('resize', updateToggleSlider);
+
+        // Mode switching
+        function setMode(newMode) {
+            if (state.mode === newMode) return;
+            state.mode = newMode;
+
+            const isPrediction = newMode === 'prediction';
+
+            // Update toggle buttons
+            document.querySelectorAll('.toggle-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === newMode);
+            });
+            updateToggleSlider();
+
+            // Update header text
+            document.getElementById('overline').textContent = isPrediction
+                ? 'Growth Projections to Adulthood'
+                : 'A Family Record · 2020–2025';
+
+            document.getElementById('intro').textContent = isPrediction
+                ? 'Tracking heights by age with projected adult heights based on CDC growth percentiles'
+                : 'Measuring the heights of four children as they grow, charted by age for comparison';
+
+            // Update chart
+            chart.options.scales.x.max = isPrediction ? 21 : 12;
+            chart.options.scales.y.max = isPrediction ? 200 : 160;
+            chart.options.scales.y.ticks.stepSize = isPrediction ? 20 : 15;
+
+            // Toggle projection lines
+            Object.keys(datasetIndices).forEach(name => {
+                const projIndex = datasetIndices[name].projected;
+                chart.getDatasetMeta(projIndex).hidden = !isPrediction || !state.visibility[name];
+            });
+
+            chart.update();
+
+            // Update chart legend
+            document.getElementById('chartLegend').classList.toggle('visible', isPrediction);
+
+            // Update stats section
+            document.getElementById('statsTitle').textContent = isPrediction
+                ? 'Projected Adult Heights at Age 20'
+                : 'Latest Measurements · December 2025';
+
+            document.getElementById('statsCurrent').classList.toggle('hidden', isPrediction);
+            document.getElementById('statsProjected').classList.toggle('hidden', !isPrediction);
+
+            // Update methodology
+            document.getElementById('methodology').classList.toggle('visible', isPrediction);
+
+            // Update footer
+            document.getElementById('footerText').textContent = isPrediction
+                ? 'Solid lines represent actual measurements. Dashed lines show projected growth based on CDC percentile curves. Hover over points for details.'
+                : 'Hover over points to reveal measurements';
+        }
+
+        // Child visibility toggle
+        function toggleChild(name) {
+            state.visibility[name] = !state.visibility[name];
+            const isVisible = state.visibility[name];
+            const isPrediction = state.mode === 'prediction';
+
+            // Toggle actual line
+            chart.getDatasetMeta(datasetIndices[name].actual).hidden = !isVisible;
+
+            // Toggle projected line (only if in prediction mode)
+            if (isPrediction) {
+                chart.getDatasetMeta(datasetIndices[name].projected).hidden = !isVisible;
+            }
+
+            chart.update();
+
+            // Update tag appearance
+            const tag = document.querySelector(`.child-tag.${name}`);
+            tag.classList.toggle('active', isVisible);
+            tag.classList.toggle('inactive', !isVisible);
+        }
+    </script>
 </body>
 </html>
